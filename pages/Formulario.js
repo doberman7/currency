@@ -1,7 +1,21 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-
+import { Form, Input, Button, message } from 'antd';
+import {useState} from 'react'
 function Formulario() {
+  const [error,setError] = useState(null);
   const onFinish = (values) => {
+    Object.entries(values).map((val)=>{
+      // console.log(val)
+      let valor = Number(val[1])
+      if(typeof valor !== 'number' ||
+        Number.isNaN(valor)
+      ){
+        setError('usa nùmeros');
+        message.warning('usa numeros')
+      }
+      })
+
+
+
     console.log('Success:', values);
   };
 
@@ -30,41 +44,19 @@ function Formulario() {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
+
+
       <Form.Item
-        label="Username"
-        name="username"
+        label="cantidad"
+        name="cantidad"
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: 'ingresa cantidad',
           },
         ]}
       >
         <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        name="remember"
-        valuePropName="checked"
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
-        <Checkbox>Remember me</Checkbox>
       </Form.Item>
 
       <Form.Item
