@@ -3,20 +3,26 @@ import {useState} from 'react'
 function Formulario() {
   const [error,setError] = useState(null);
   const onFinish = (values) => {
+    let send = true
     Object.entries(values).map((val)=>{
       // console.log(val)
       let valor = Number(val[1])
       if(typeof valor !== 'number' ||
         Number.isNaN(valor)
-      ){
-        setError('usa nùmeros');
-        message.warning('usa numeros')
+      )  {
+          setError('usa  nùmeros');
+          message.warning('usa solo numeros')
+          send = false
+         }
+        }
+      )
+      if(send){
+        console.log('Success:', values);
       }
-      })
 
 
 
-    console.log('Success:', values);
+    
   };
 
   const onFinishFailed = (errorInfo) => {
