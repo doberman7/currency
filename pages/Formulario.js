@@ -40,6 +40,7 @@ function Formulario() {
           currency = await currency.json();
 
           multiplicacion = currency.quotes.USDMXN*cantidad
+          multiplicacion=Math.round((multiplicacion+Number.EPSILON)  *100)/100
           setResultado(multiplicacion)  
           setDolares(cantidad)       
           setError(null)
@@ -58,15 +59,17 @@ function Formulario() {
   return (
       <>
 
-        {error && <Alert message={error} type='error'/>}
-        {dolares&&resultado && <Alert message={`${dolares} es ${resultado} dolares `} type='success'/>}        
+        
+        <p>{error && <Alert message={error} type='error'/>}</p>
+        <p >{dolares&&resultado && <Alert message={`$${dolares}USD son   $${resultado}MXN `} type='success'/>}        </p>
+        
         <Form
         name="basic"
         labelCol={{
-          span: 8,
+          // span: 8,
         }}
         wrapperCol={{
-          span: 16,
+          // span: 16,
         }}
         initialValues={{
           remember: true,
