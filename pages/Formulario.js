@@ -61,7 +61,7 @@ function Formulario() {
 
         
         <p>{error && <Alert message={error} type='error'/>}</p>
-        <p >{dolares&&resultado && <Alert message={`$${dolares}USD son   $${resultado}MXN `} type='success'/>}        </p>
+        <p >{dolares&&resultado && <Alert message={`USD$${dolares} equivale a MXN$${resultado} `} type='success'/>}        </p>
         
         <Form
         name="basic"
