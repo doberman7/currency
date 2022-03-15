@@ -6,7 +6,7 @@ function Formulario() {
   const [error,setError] = useState(null);
   const [resultado,setResultado]=useState(false)
   const [dolares,setDolares]=useState(false)
-  const access_key='138ca01354c449d7741ab9dbca4f4252'  
+  const access_key= process.env.ACCESS_KEY 
   
   
   // useEffect(()=>{    
@@ -36,7 +36,7 @@ function Formulario() {
         try{
           message.success(`enviado ${cantidad}`)  
           let currency = await fetch(`http://api.currencylayer.com/live?access_key=${access_key}`)
-    
+          console.log(currency)
           currency = await currency.json();
 
           multiplicacion = currency.quotes.USDMXN*cantidad
