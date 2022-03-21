@@ -1,11 +1,13 @@
 import { SecurityScanOutlined } from '@ant-design/icons/lib/icons';
 import { Form, Input, Button, message, Alert } from 'antd';
+import { Typography } from 'antd';
 import {useEffect,useState} from 'react'
 function Formulario() {
   let multiplicacion = 1
   const [error,setError] = useState(null);
   const [resultado,setResultado]=useState(false)
   const [dolares,setDolares]=useState(false)
+  const { Title,Text } = Typography;
 
   useEffect(()=>{    
       setError(false)    
@@ -25,12 +27,17 @@ function Formulario() {
           setResultado(null)
           setDolares(null)
           send = false
-
          }
         }
       )
-      if(send){
-
+      if(cantidad==0){
+          setError('ingresa num distinto de 0');
+          message.warning('ingresa num distinto de 0')        
+          send = false
+          setResultado(null)
+          setDolares(null)
+      };
+      if(send && cantidad!=0){
         try{
           message.success(`enviado ${cantidad}`)  
           let currency = await fetch(`http://api.currencylayer.com/live?access_key=${process.env.ACCESS_KEY}`)
@@ -41,7 +48,7 @@ function Formulario() {
           setDolares(cantidad)       
           setError(null)
         }catch(e){
-          // console.log(e)
+          console.log(e)
           message.error(' valio verg ')
         }
       }    
@@ -54,9 +61,12 @@ function Formulario() {
  
   return (
       <>        
-        <p>{error && <Alert message={error} type='error'/>}</p>
-        <p >{dolares&&resultado && <Alert message={`${dolares}$USD equivale a ${resultado}$MXN `} type='success'/>}        </p>
-        
+        <p>{error && <Alert message={error} type='error'/>}</p>       
+        <p >{dolares!=0 && resultado!=0 && resultado && <Alert message={`${dolares}$USD `} type='warning'/>}</p>
+        <p>{dolares!=0 && resultado!=0 && resultado &&     <Text default>equivale a </Text>
+}</p>
+        <p >{dolares!=0 && resultado!=0 && resultado && <Alert message={`${resultado}$MXN `} type='success'/>}</p>
+        <p>{resultado==false && <Title level={5}>Ingresa dolares</Title>}</p>
         <Form
         name="basic"
         labelCol={{
