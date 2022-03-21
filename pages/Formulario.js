@@ -6,12 +6,10 @@ function Formulario() {
   const [error,setError] = useState(null);
   const [resultado,setResultado]=useState(false)
   const [dolares,setDolares]=useState(false)
-  const access_key= process.env.ACCESS_KEY 
-  
-  
-  // useEffect(()=>{    
-  //     setError(false)    
-  // },[error])
+
+  useEffect(()=>{    
+      setError(false)    
+  },[error])
 
   const onSubmit = async (values)=> {    
     let send = true
@@ -35,18 +33,16 @@ function Formulario() {
 
         try{
           message.success(`enviado ${cantidad}`)  
-          let currency = await fetch(`http://api.currencylayer.com/live?access_key=${access_key}`)
-          console.log(currency)
+          let currency = await fetch(`http://api.currencylayer.com/live?access_key=${process.env.ACCESS_KEY}`)
           currency = await currency.json();
-
           multiplicacion = currency.quotes.USDMXN*cantidad
           multiplicacion=Math.round((multiplicacion+Number.EPSILON)  *100)/100
           setResultado(multiplicacion)  
           setDolares(cantidad)       
           setError(null)
         }catch(e){
-          console.log(e)
-          message.error(e)
+          // console.log(e)
+          message.error(' valio verg ')
         }
       }    
   };
@@ -57,9 +53,7 @@ function Formulario() {
   };
  
   return (
-      <>
-
-        
+      <>        
         <p>{error && <Alert message={error} type='error'/>}</p>
         <p >{dolares&&resultado && <Alert message={`${dolares}$USD equivale a ${resultado}$MXN `} type='success'/>}        </p>
         
