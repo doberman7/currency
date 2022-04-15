@@ -69,7 +69,7 @@ function Formulario() {
         <p>{dolares!=0 && resultado!=0 && resultado &&     <Text default>equivale a </Text>
 }</p>
         <p >{dolares!=0 && resultado!=0 && resultado && <Alert message={`${resultado}$MXN `} type='success'/>}</p>
-        <p>{resultado==false && <Title level={5}>Ingresa </Title>}</p>
+        <p>{resultado==false && <Title level={5}>Ingresa USD</Title>}</p>
         <Form
         name="basic"
         labelCol={{
