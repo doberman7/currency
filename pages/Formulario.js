@@ -40,11 +40,11 @@ function Formulario() {
       if(send && cantidad!=0){
         try{
           message.success(`enviado ${cantidad}`)  
-          console.log(process.env.NEXT_PUBLIC_ACCESS_KEY)
+          // console.log(process.env.NEXT_PUBLIC_ACCESS_KEY)
 
-          let currency = await fetch(`http://api.currencylayer.com/live?access_key=${process.env.NEXT_PUBLIC_ACCESS_KEY}`)
+          let currency = await fetch(`http://api.currencylayer.com/live?access_key=${process.env.NEXT_PUBLIC_VERCEL_ENV}`)//The Environment that the app is deployed an running on. The value can be either production, preview, or development.
           currency = await currency.json();
-          console.log(currency)
+          // console.log(currency)
           multiplicacion = currency.quotes.USDMXN*cantidad
           multiplicacion=Math.round((multiplicacion+Number.EPSILON)  *100)/100
           setResultado(multiplicacion)  
