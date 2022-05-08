@@ -41,10 +41,18 @@ function Formulario() {
         try{
           message.success(`enviado ${cantidad}`)  
           // console.log(process.env.NEXT_PUBLIC_VERCEL_ENV)
+          let myHeaders = new Headers();
+          myHeaders.append("apikey", "e3M4pk7HlfYgwshEhTMkYYqjOxtihA2R");
 
-          let currency = await fetch(`http://api.currencylayer.com/live?access_key=${process.env.NEXT_PUBLIC_VERCEL_ENV}`)//The Environment that the app is deployed an running on. The value can be either production, preview, or development.
+          var requestOptions = {
+            method: 'GET',
+            redirect: 'follow',
+            headers: myHeaders
+          };
+
+          let currency = await fetch(`https://api.apilayer.com/exchangerates_data/convert?to=mxn&from=usd&amount=${cantidad}`, requestOptions)
           currency = await currency.json();
-          // console.log(currency)
+          console.log(currency)
           multiplicacion = currency.quotes.USDMXN*cantidad
           multiplicacion=Math.round((multiplicacion+Number.EPSILON)  *100)/100
           setResultado(multiplicacion)  
