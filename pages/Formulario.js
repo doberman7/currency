@@ -42,7 +42,7 @@ function Formulario() {
           message.success(`enviado ${cantidad}`)  
           // console.log(process.env.NEXT_PUBLIC_VERCEL_ENV)
           let myHeaders = new Headers();
-          myHeaders.append("apikey", "e3M4pk7HlfYgwshEhTMkYYqjOxtihA2R");
+          myHeaders.append("apikey", process.env.NEXT_PUBLIC_VERCEL_ENV);
 
           let requestOptions = {
             method: 'GET',
@@ -52,7 +52,7 @@ function Formulario() {
 
           let currency = await fetch(`https://api.apilayer.com/exchangerates_data/convert?to=mxn&from=usd&amount=${cantidad}`, requestOptions)
           currency = await currency.json();
-          console.log(currency.query.amount)
+          console.log(currency)
           // multiplicacion = currency.quotes.USDMXN*cantidad
           // multiplicacion=Math.round((multiplicacion+Number.EPSILON)  *100)/100
           setResultado(currency.result)  
