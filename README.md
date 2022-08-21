@@ -5,14 +5,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```npm run-scrip dev
-# or
-yarn dev
+# npm
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
-## Deploy on Vercel
+## About an app to obtain USD to MXN exchange values 
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
